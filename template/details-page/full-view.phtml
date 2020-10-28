@@ -1,0 +1,39 @@
+<div class="blog-entry">
+    <p class="date-title"><?= $entry->getDate() ?> : <?= $entry->getTitle() ?></p>
+    <p class="content"><?= $entry->getContent() ?></p>
+    <p class="author"><?= $entry->getAuthor() ?></p>
+
+
+        <div class="commentSection">
+            <p><u><?= count($comments) ?> Kommentar vorhanden :</u></p>
+            <?php foreach ($comments as $i => $comment) : ?>
+            <div class="comment">
+                <p><?=$i +1?>. <strong><?= $comment->getUser() ?></strong>(<a href="https://<?= $comment->getUrl() ?>"><?= $comment->getMail() ?></a>) meint: (am <?= $comment->getDate() ?>):
+                <p> <?= $comment->getComment() ?></p>
+            </div>
+            <?php endforeach; ?>
+        </div>
+
+
+    <p><u>Kommentar schreiben :</u></p>
+    <form  method="POST" action="/Add-Comment?id=<?= $id ?>" >
+        <div class="form-item">
+            <label for="name"><b>Name</b></label>
+            <input type="text" name="name" required>
+        </div>
+        <div class="form-item">
+            <label for="mail"><b>Mail (optional)</b></label>
+            <input type="text" name="mail">
+        </div>
+        <div class="form-item">
+            <label for="url"><b>URL (optional)</b></label>
+            <input type="text" name="url">
+        </div>
+        <div class="form-item">
+            <label for="comment"><b>Bemerkung</b></label>
+            <textarea cols="20" name="comment"></textarea>
+        </div>
+        <button type="submit" name="sendComment" id="sendComment" value="true">Absenden</button>
+    </form>
+</div>
+
